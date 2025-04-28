@@ -1,0 +1,172 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/home/rootovich-desk/Рабочий стол/Pets/trash_can/app/helpers/application_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/home/rootovich-desk/Рабочий стол/Pets/trash_can/app/interactors/user_files/create.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          8,
+          8,
+          8,
+          null,
+          8,
+          8,
+          null,
+          null,
+          1,
+          null,
+          1,
+          null,
+          8,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          8,
+          null,
+          null,
+          1,
+          8,
+          null,
+          null,
+          1,
+          16,
+          16,
+          null,
+          null,
+          1,
+          8,
+          null,
+          null,
+          1,
+          8,
+          null,
+          8,
+          null,
+          2,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/rootovich-desk/Рабочий стол/Pets/trash_can/app/models/user.rb": {
+        "lines": [
+          1,
+          null,
+          null,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/rootovich-desk/Рабочий стол/Pets/trash_can/app/models/application_record.rb": {
+        "lines": [
+          1,
+          1,
+          null
+        ]
+      },
+      "/home/rootovich-desk/Рабочий стол/Pets/trash_can/app/models/folder.rb": {
+        "lines": [
+          1,
+          1,
+          null
+        ]
+      },
+      "/home/rootovich-desk/Рабочий стол/Pets/trash_can/app/models/user_file.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/rootovich-desk/Рабочий стол/Pets/trash_can/app/controllers/application_controller.rb": {
+        "lines": [
+          0,
+          null,
+          0,
+          0
+        ],
+        "branches": {}
+      },
+      "/home/rootovich-desk/Рабочий стол/Pets/trash_can/app/jobs/application_job.rb": {
+        "lines": [
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          0
+        ],
+        "branches": {}
+      },
+      "/home/rootovich-desk/Рабочий стол/Pets/trash_can/app/mailers/application_mailer.rb": {
+        "lines": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {}
+      }
+    },
+    "timestamp": 1745863953
+  }
+}

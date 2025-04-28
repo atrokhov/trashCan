@@ -38,7 +38,7 @@ gem "kamal", require: false
 gem "thruster", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
+gem "image_processing", "~> 1.2"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -60,4 +60,39 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+
+  gem "database_cleaner"
+  gem "faker"
+  gem "simplecov", require: false
+  gem "timecop"
 end
+
+group :development, :test do
+  gem "factory_bot_rails"
+  gem "rspec-rails", "~> 7.0.0"
+
+  # rubocop
+  gem "rubocop-capybara", require: false
+  gem "rubocop-factory_bot", require: false
+  gem "rubocop-performance", require: false
+  gem "rubocop-rails", require: false
+  gem "rubocop-rspec", require: false
+  gem "rubocop-rspec_rails", require: false
+  gem "rubocop-thread_safety", require: false
+end
+
+gem "bootstrap"
+gem "caxlsx"
+gem "caxlsx_rails"
+gem "dartsass-sprockets"
+gem "devise"
+gem "devise-i18n"
+gem "i18n-js"
+gem "interactor-rails"
+gem "jquery-rails"
+gem "reform"
+gem "reform-rails"
+gem "rest-client"
+gem "sidekiq"
+gem "sidekiq-cron"
+gem "sidekiq-unique-jobs"
