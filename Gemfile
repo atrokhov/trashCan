@@ -69,7 +69,7 @@ end
 
 group :development, :test do
   gem "factory_bot_rails"
-  gem "rspec-rails", "~> 7.0.0"
+  gem "rspec-rails", "~> 7.1.1"
 
   # rubocop
   gem "rubocop-capybara", require: false
