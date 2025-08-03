@@ -1,0 +1,7 @@
+<% unless params[:page].to_i > @files_and_folders[:total_pages] %>
+  <%= turbo_stream.append "items-container" do %>
+    <% @files_and_folders[:items].each do |item| %>
+      <%= render 'shared/item', item: item %>
+    <% end %>
+  <% end %>
+<% end %>

@@ -1,0 +1,30 @@
+<% content_for :title do %>
+  <%= @current_user.full_name %>'s desktop
+<% end %>
+
+<% if @current_user.admin? %>
+  <div class="admin-section bg-gray-100 dark:bg-gray-100 p-4 rounded-lg mb-6">
+    <h2 class="text-xl font-semibold">Admin Section</h2>
+    <p class="text-gray-700">You have admin privileges. Here will be other user's desktops</p>
+    <% @all_desktops.each do |desktop| %>
+      <div class="grid grid-cols-[repeat(auto-fill,minmax(100px,1fr))] gap-12">
+        <div data-controller="toggle content-modal" 
+             data-action="click->toggle#toggle" 
+             data-toggle-active-class="bg-gray-300 border-gray-700"
+             data-content-modal-url-value="<%= folder_url(desktop.id) %>"
+             data-content-modal-extension-value="<%= desktop.name.split('.')[1] %>"
+             data-content-modal-mime-type-value="folder"
+             class="folder-item w-full min-h-20">
+          <div>
+            <i class="material-icons text-xl">folder_shared</i>
+          </div>
+          <p class="item-name text-2xl font-medium break-words max-w-[10ch] truncate">
+            <%= desktop.user.full_name%>'s <%= desktop.name %>
+          </p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<%= render 'folders/folder_content', items: @files_and_folders, items_path: desktop_index_path %>

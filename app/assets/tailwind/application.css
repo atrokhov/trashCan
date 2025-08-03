@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+.context-menu {
+  @apply absolute min-w-[220px] bg-white border border-gray-200 rounded-md shadow-lg z-50 overflow-hidden;
+}
+
+.menu-item {
+  @apply w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center text-sm;
+}
+
+@layer components {
+  .material-icons {
+    @apply select-none font-normal normal-case inline-block leading-none;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.drag-active {
+  animation: pulse 2s infinite;
+}

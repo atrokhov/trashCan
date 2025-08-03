@@ -1,0 +1,5 @@
+<% content_for :title do %>
+  <%= @folder.name %>'s desktop
+<% end %>
+
+<%= render 'folders/folder_content', items: @files_and_folders, items_path: folder_path(@folder) %>

@@ -1,0 +1,71 @@
+<div class="min-h-screen p-6" data-controller="context-menu upload" data-upload-url-value="<%= file_uploads_path(folder_id: @folder.id) %>">
+  <div 
+      data-upload-target="progress" 
+      class="hidden absolute inset-0 bg-white/80 backdrop-blur-sm flex flex-col items-center justify-center z-50">
+    <div class="w-3/4 max-w-md bg-gray-200 rounded-full h-4 mb-4">
+      <div 
+        data-upload-target="progressBar" 
+        class="bg-blue-600 h-4 rounded-full transition-all duration-300 ease-out"
+        style="width: 0%"
+      ></div>
+    </div>
+    <div 
+      data-upload-target="progressText" 
+      class="text-xl font-bold text-gray-700 mb-2"
+    >0%</div>
+    <div 
+      data-upload-target="status" 
+      class="text-gray-600 text-center"
+    >Начало загрузки...</div>
+  </div>
+  <div class="mb-6">
+    <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+      <input 
+        type="text" 
+        id="file_name" 
+        placeholder="Название файла (опционально)" 
+        class="w-full px-4 py-2 border rounded-lg"
+      >
+      
+      <input 
+        type="file" 
+        multiple
+        class="hidden"
+        data-upload-target="input"
+        data-action="change->upload#onFileSelect"
+      >
+      
+      <button 
+        type="button" 
+        class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 flex items-center justify-center"
+        data-action="click->upload#openFileDialog"
+      >
+        <i class="material-icons mr-1">cloud_upload</i> 
+        <span>Выбрать файлы</span>
+      </button>
+    </div>
+    <p class="text-sm text-gray-500 mt-2">Или перетащите файлы в область ниже</p>
+  </div>
+
+  <div 
+    data-context-menu-target="menu" 
+    class="context-menu hidden"
+    data-action="contextmenu->context-menu#show"
+  ></div>
+  <div data-controller="infinite-loader"
+       data-upload-target="dropzone"
+       data-infinite-loader-url-value="<%= items_path %>"
+       data-infinite-loader-last-page-value="<%= params[:page].to_i > items[:total_pages] %>">
+    <div id="items-container" 
+         data-context-menu-target="container"
+         data-action="contextmenu->context-menu#show"
+         data-infinite-loader-target="container" 
+         class="grid grid-cols-[repeat(auto-fill,minmax(100px,1fr))] gap-12">
+      <% items[:items].each do |item| %>
+        <%= render 'shared/item', item: item %>
+      <% end %>
+    </div>
+
+    <%= render 'shared/loader' %>
+  </div>
+</div>

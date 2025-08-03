@@ -1,0 +1,33 @@
+<div data-controller="toggle content-modal" 
+     data-action="click->toggle#toggle" 
+     data-toggle-active-class="bg-gray-300 border-gray-700"
+     data-content-modal-url-value="<%= item['type'] == 'folder' ? folder_url(item['id']) : file_url(item['id']) %>"
+     data-content-modal-extension-value="<%= item['name'].split('.')[1] %>"
+     data-content-modal-mime-type-value="<%= item['mime_type'] %>"
+     data-context-item="<%= item['type'] == 'folder' ? "folder-#{item['id']}" : "file-#{item['id']}" %>"
+     class="w-full min-h-20 cursor-pointer hover:bg-gray-200">
+  <div class="folder-item text-center <%= item['type'] %>-item">
+    <div>
+      <% case item['type'] %>
+      <% when 'font' %>
+        <% icon = 'font_download' %>
+      <% when 'text' %>
+        <% icon = 'description' %>
+      <% when 'another' %>
+        <% icon = 'insert_drive_file' %>
+      <% when 'application' %>
+        <% icon = 'insert_drive_file' %>
+      <% when 'folder' %>
+        <% icon = 'folder' %>
+      <% when 'image' %>
+        <% icon = 'image' %>
+      <% else %>
+        <% icon = item['type'] + '_file' %>
+      <% end %>
+      <i class="material-icons"><%= icon %></i>
+    </div>
+    <p class="item-name text-2xl font-medium break-words max-w-[10ch] truncate">
+      <%= item['name'] %>
+    </p>
+  </div>
+</div>

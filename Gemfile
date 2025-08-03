@@ -81,18 +81,18 @@ group :development, :test do
   gem "rubocop-thread_safety", require: false
 end
 
-gem "bootstrap"
 gem "caxlsx"
 gem "caxlsx_rails"
-gem "dartsass-sprockets"
 gem "devise"
 gem "devise-i18n"
 gem "i18n-js"
 gem "interactor-rails"
 gem "jquery-rails"
+gem "redis"
 gem "reform"
 gem "reform-rails"
 gem "rest-client"
 gem "sidekiq"
 gem "sidekiq-cron"
 gem "sidekiq-unique-jobs"
+gem "tailwindcss-rails"

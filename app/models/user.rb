@@ -8,7 +8,7 @@ class User < ApplicationRecord
   has_many :user_files, dependent: :destroy
 
   enum :role, {
-    simple_user: 0,
+    default_user: 0,
     admin: 1
   }
 end

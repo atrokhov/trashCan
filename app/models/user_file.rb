@@ -13,4 +13,8 @@ class UserFile < ApplicationRecord
     font: 5,
     another: 6
   }
+
+  def name_with_extention
+    "#{file_name}.#{file_extension}"
+  end
 end

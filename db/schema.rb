@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_27_100928) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_06_151604) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -45,9 +45,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_27_100928) do
   create_table "folders", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.bigint "user_id", null: false
-    t.boolean "visible", default: false, null: false
+    t.boolean "visible", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "folder_id"
+    t.boolean "read_only", default: false, null: false
+    t.jsonb "settings", default: {}, null: false
+    t.index ["folder_id"], name: "index_folders_on_folder_id"
     t.index ["name"], name: "index_folders_on_name"
     t.index ["user_id"], name: "index_folders_on_user_id"
   end
@@ -86,6 +90,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_27_100928) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "folders", "folders"
   add_foreign_key "folders", "users"
   add_foreign_key "user_files", "folders"
   add_foreign_key "user_files", "users"
