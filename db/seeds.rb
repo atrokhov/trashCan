@@ -34,20 +34,19 @@ user_desktop = Folder.create user: user, name: 'Desktop', settings: { sort_field
 
 file_path = Rails.root.join('public', 'icon.png')
 
-uploaded_file = {
-  tempfile: Rack::Test::UploadedFile.new(file_path),
-  filename: File.basename(file_path),
-  name: 'icon',
-  content_type: 'image/png',
-  head: "Content-Disposition: form-data; name=\"user_file[file]\"; filename=\"#{File.basename(file_path)}\"\r\n"
-}
+uploaded_file = Rack::Test::UploadedFile.new(file_path)
+
+blob = ActiveStorage::Blob.create_and_upload!(
+  io: uploaded_file.tempfile,
+  filename: uploaded_file.original_filename,
+  content_type: 'image/png'
+)
 
 UserFiles::Create.call(
   params: {
     user_id: admin.id,
     folder_id: admin_desktop.id,
-    file: uploaded_file,
-    read_only: false
+    file: ActiveStorage::Blob.find_signed(blob.signed_id)
   }
 )
 
@@ -55,8 +54,7 @@ UserFiles::Create.call(
   params: {
     user_id: admin.id,
     folder_id: admin_folder.id,
-    file: uploaded_file,
-    read_only: false
+    file: ActiveStorage::Blob.find_signed(blob.signed_id)
   }
 )
 
@@ -67,20 +65,19 @@ test_file_paths = Dir.children(test_files_path)
   test_file_paths.each do |test_file_path|
     mime_type = Rack::Mime.mime_type(File.extname(test_file_path), fallback = 'model/gltf-binary')
 
-    uploaded_test_file = {
-      tempfile: Rack::Test::UploadedFile.new(Rails.root.join('spec', 'fixtures', 'files', test_file_path)),
-      filename: test_file_path,
-      name: test_file_path.split(".").first,
-      content_type: mime_type,
-      head: "Content-Disposition: form-data; name=\"user_file[file]\"; filename=\"#{test_file_path}\"\r\n"
-    }
+    uploaded_test_file = Rack::Test::UploadedFile.new(file_path)
+
+    blob = ActiveStorage::Blob.create_and_upload!(
+      io: uploaded_test_file.tempfile,
+      filename: uploaded_test_file.original_filename,
+      content_type: mime_type
+    )
 
     UserFiles::Create.call(
       params: {
-        user_id: admin.id,
+        user_id: user.id,
         folder_id: user_desktop.id,
-        file: uploaded_test_file,
-        read_only: false
+        file: ActiveStorage::Blob.find_signed(blob.signed_id)
       }
     )
   end

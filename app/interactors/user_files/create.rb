@@ -14,8 +14,6 @@ module UserFiles
       context.user_file = UserFile.new
       context.user_file.file.attach(params[:file])
       context.user_file.assign_attributes(create_params)
-      p create_params
-      p original_filename
       context.fail!(error: context.user_file.errors.full_messages.join(", ")) unless context.user_file.save
     end
 

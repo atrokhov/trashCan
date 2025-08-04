@@ -39,4 +39,3 @@ class FilesController < ApplicationController
     params.require(:user_file).permit(:file, :folder_id, :user_id)
   end
 end
-

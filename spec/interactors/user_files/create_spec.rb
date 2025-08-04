@@ -20,25 +20,24 @@ describe UserFiles::Create do
 
     let(:params) do
       {
-        user: user,
-        folder: folder,
-        read_only: false,
-        visible: true
+        user_id: user.id,
+        folder_id: folder.id
       }
     end
 
     context 'with jpg file' do
       before do
-        params[:file] = {
-          'filename' => 'test.jpg',
-          'type' => 'image/jpg',
-          'name' => 'file',
-          'tempfile' => attached_jpg_file,
-          'head' => "Content-Disposition: form-data; name=\"file\"; filename=\"test.jpg\"\r\nContent-Type: image/jpeg\r\n"
-        }
+        blob = ActiveStorage::Blob.create_and_upload!(
+          io: attached_jpg_file.tempfile,
+          filename: attached_jpg_file.original_filename,
+          content_type: 'image/jpg'
+        )
+        params[:file] = ActiveStorage::Blob.find_signed(blob.signed_id)
       end
 
       it 'has correct fields values' do
+        p params
+        p response.error
         expect(response.user_file.user_id).to eq user.id
         expect(response.user_file.folder_id).to eq folder.id
         expect(response.user_file.read_only).to be_falsey
@@ -55,13 +54,12 @@ describe UserFiles::Create do
 
     context 'with svg file' do
       before do
-        params[:file] = {
-          'filename' => 'test.svg',
-          'type' => 'image/jpg',
-          'name' => 'file',
-          'tempfile' => attached_svg_file,
-          'head' => "Content-Disposition: form-data; name=\"file\"; filename=\"test.svg\"\r\nContent-Type: image/svg+xml\r\n"
-        }
+        blob = ActiveStorage::Blob.create_and_upload!(
+          io: attached_svg_file.tempfile,
+          filename: attached_svg_file.original_filename,
+          content_type: 'image/svg+xml'
+        )
+        params[:file] = ActiveStorage::Blob.find_signed(blob.signed_id)
       end
 
       it 'has correct fields values' do
@@ -81,13 +79,12 @@ describe UserFiles::Create do
 
     context 'with video file' do
       before do
-        params[:file] = {
-          'filename' => 'test.mp4',
-          'type' => 'video/mp4',
-          'name' => 'file',
-          'tempfile' => attached_video_file,
-          'head' => "Content-Disposition: form-data; name=\"file\"; filename=\"test.mp4\"\r\nContent-Type: video/mp4\r\n"
-        }
+        blob = ActiveStorage::Blob.create_and_upload!(
+          io: attached_video_file.tempfile,
+          filename: attached_video_file.original_filename,
+          content_type: 'video/mp4'
+        )
+        params[:file] = ActiveStorage::Blob.find_signed(blob.signed_id)
       end
 
       it 'has correct fields values' do
@@ -107,13 +104,12 @@ describe UserFiles::Create do
 
     context 'with audio file' do
       before do
-        params[:file] = {
-          'filename' => 'test.mp3',
-          'type' => 'audio/mpeg',
-          'name' => 'file',
-          'tempfile' => attached_audio_file,
-          'head' => "Content-Disposition: form-data; name=\"file\"; filename=\"test.mp3\"\r\nContent-Type: audio/mpeg\r\n"
-        }
+        blob = ActiveStorage::Blob.create_and_upload!(
+          io: attached_audio_file.tempfile,
+          filename: attached_audio_file.original_filename,
+          content_type: 'audio/mpeg'
+        )
+        params[:file] = ActiveStorage::Blob.find_signed(blob.signed_id)
       end
 
       it 'has correct fields values' do
@@ -133,13 +129,12 @@ describe UserFiles::Create do
 
     context 'with pdf file' do
       before do
-        params[:file] = {
-          'filename' => 'test.pdf',
-          'type' => 'application/pdf',
-          'name' => 'file',
-          'tempfile' => attached_pdf_file,
-          'head' => "Content-Disposition: form-data; name=\"file\"; filename=\"test.pdf\"\r\nContent-Type: application/pdf\r\n"
-        }
+        blob = ActiveStorage::Blob.create_and_upload!(
+          io: attached_pdf_file.tempfile,
+          filename: attached_pdf_file.original_filename,
+          content_type: 'application/pdf'
+        )
+        params[:file] = ActiveStorage::Blob.find_signed(blob.signed_id)
       end
 
       it 'has correct fields values' do
@@ -159,13 +154,12 @@ describe UserFiles::Create do
 
     context 'with text file' do
       before do
-        params[:file] = {
-          'filename' => 'test.txt',
-          'type' => 'text/plain',
-          'name' => 'file',
-          'tempfile' => attached_text_file,
-          'head' => "Content-Disposition: form-data; name=\"file\"; filename=\"test.txt\"\r\nContent-Type: text/plain\r\n"
-        }
+        blob = ActiveStorage::Blob.create_and_upload!(
+          io: attached_text_file.tempfile,
+          filename: attached_text_file.original_filename,
+          content_type: 'text/plain'
+        )
+        params[:file] = ActiveStorage::Blob.find_signed(blob.signed_id)
       end
 
       it 'has correct fields values' do
@@ -185,13 +179,12 @@ describe UserFiles::Create do
 
     context 'with font file' do
       before do
-        params[:file] = {
-          'filename' => 'test.ttf',
-          'type' => 'font/ttf',
-          'name' => 'file',
-          'tempfile' => attached_font_file,
-          'head' => "Content-Disposition: form-data; name=\"file\"; filename=\"test.ttf\"\r\nContent-Type: font/ttf\r\n"
-        }
+        blob = ActiveStorage::Blob.create_and_upload!(
+          io: attached_font_file.tempfile,
+          filename: attached_font_file.original_filename,
+          content_type: 'font/ttf'
+        )
+        params[:file] = ActiveStorage::Blob.find_signed(blob.signed_id)
       end
 
       it 'has correct fields values' do
@@ -211,13 +204,12 @@ describe UserFiles::Create do
 
     context 'with another mime file' do
       before do
-        params[:file] = {
-          'filename' => 'test.glb',
-          'type' => 'model/gltf-binary',
-          'name' => 'file',
-          'tempfile' => attached_another_file,
-          'head' => "Content-Disposition: form-data; name=\"file\"; filename=\"test.glb\"\r\nContent-Type: model/gltf-binary\r\n"
-        }
+        blob = ActiveStorage::Blob.create_and_upload!(
+          io: attached_another_file.tempfile,
+          filename: attached_another_file.original_filename,
+          content_type: 'model/gltf-binary'
+        )
+        params[:file] = ActiveStorage::Blob.find_signed(blob.signed_id)
       end
 
       it 'has correct fields values' do
