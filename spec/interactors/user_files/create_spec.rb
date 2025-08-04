@@ -36,8 +36,6 @@ describe UserFiles::Create do
       end
 
       it 'has correct fields values' do
-        p params
-        p response.error
         expect(response.user_file.user_id).to eq user.id
         expect(response.user_file.folder_id).to eq folder.id
         expect(response.user_file.read_only).to be_falsey
